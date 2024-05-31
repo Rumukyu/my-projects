@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クラウドソーシングサイト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="bg-white dark:bg-zinc-800">
+        <!-- ヘッダー -->
+        <header class="fixed top-0 left-0 w-full bg-white dark:bg-zinc-800 shadow-md z-10">
+            <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+                <img src="https://placehold.co/80x40" alt="ロゴ" class="h-8 w-auto">
+                <nav class="flex items-center">
+                    <a href="#" class="text-zinc-800 dark:text-white mx-4">ホーム</a>
+                    <a href="#" class="text-zinc-800 dark:text-white mx-4">プロジェクト</a>
+                    <a href="#" class="text-zinc-800 dark:text-white mx-4">サービス</a>
+                    <a href="#" class="text-zinc-800 dark:text-white mx-4">サインイン/サインアップ</a>
+                </nav>
+                <div class="flex items-center">
+                    <input type="text" placeholder="検索..." class="bg-zinc-100 dark:bg-zinc-700 px-2 py-1 rounded-lg">
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="max-w-7xl mx-auto p-4 pt-20">
+            <!-- ヒーローセクション -->
+            <section>
+                <div class="mb-8">
+                    <img src="https://placehold.co/1200x600" alt="ヒーローイメージ" class="w-full rounded-lg shadow-lg">
+                    <div class="text-center mt-4">
+                        <h2 class="text-3xl font-bold text-zinc-800 dark:text-white mb-2">キャッチフレーズをここに</h2>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">今すぐ始める</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 人気プロジェクトセクション -->
+            <section class="mb-8">
+                <h3 class="text-2xl font-bold text-zinc-800 dark:text-white mb-4">人気のプロジェクト</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {% for project in projects %}
+                    <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-4 project-tile">
+                        <a href="project-detail.html">
+                            <img src="{{ project.image }}" alt="プロジェクトイメージ" class="rounded-lg mb-4">
+                            <h4 class="text-xl font-bold text-zinc-800 dark:text-white mb-2">{{ project.title }}</h4>
+                            <p class="text-zinc-600 dark:text-zinc-300">{{ project.summary }}</p>
+                            <p class="text-zinc-600 dark:text-zinc-300">予算: {{ project.budget }} | 締め切り: {{ project.deadline }}</p>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- ユーザーレビューセクション -->
+            <section>
+                <h3 class="text-2xl font-bold text-zinc-800 dark:text-white mb-4">ユーザーレビュー</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-4">
+                        <p class="text-zinc-600 dark:text-zinc-300">"他の人とコラボレーションするのに最適なプラットフォーム！"</p>
+                        <p class="text-zinc-600 dark:text-zinc-300">- ジョン・ドウ</p>
+                    </div>
+                    <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-4">
+                        <p class="text-zinc-600 dark:text-zinc-300">"素晴らしいプロジェクトを見つけました！"</p>
+                        <p class="text-zinc-600 dark:text-zinc-300">- ジェーン・スミス</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="bg-white dark:bg-zinc-800 p-4 mt-8">
+            <div class="max-w-7xl mx-auto">
+                <nav class="flex justify-between items-center">
+                    <div>
+                        <a href="#" class="text-zinc-800 dark:text-white mx-4">利用規約</a>
+                        <a href="#" class="text-zinc-800 dark:text-white mx-4">プライバシーポリシー</a>
+                        <a href="#" class="text-zinc-800 dark:text-white mx-4">お問い合わせ</a>
+                    </div>
+                    <div>
+                        <a href="#" class="text-zinc-800 dark:text-white mx-2"><img src="/icons/facebook.svg" alt="Facebook" class="h-6 w-6"></a>
+                        <a href="#" class="text-zinc-800 dark:text-white mx-2"><img src="/icons/twitter.svg" alt="Twitter" class="h-6 w-6"></a>
+                        <a href="#" class="text-zinc-800 dark:text-white mx-2"><img src="/icons/linkedin.svg" alt="LinkedIn" class="h-6 w-6"></a>
+                    </div>
+                </nav>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // プロジェクトタイルのクリックアクション
+        document.querySelectorAll('.project-tile').forEach(tile => {
+            tile.addEventListener('click', () => {
+                window.location.href = 'project-detail.html';
+            });
+        });
+    </script>
+</body>
+</html>
